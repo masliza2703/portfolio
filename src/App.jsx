@@ -50,14 +50,6 @@ function App() {
             <a href="#contact" className="btn btn-secondary">
               Contact Me
             </a>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-secondary"
-            >
-              Download Resume
-            </a>
           </div>
         </div>
         <div className="hero-right">

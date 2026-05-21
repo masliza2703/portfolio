@@ -41,8 +41,7 @@ function App() {
           <h1>Hi, I'm Masliza 👋</h1>
           <p className="hero-role">Information Systems Engineering Student</p>
           <p className="subtitle">
-            I build structured, functional web applications — from PHP MVC backends
-            to modern React frontends.
+            I am an Information Systems Engineering student with a focus on web development. I am seeking opportunities to apply my knowledge in a real working environment.
           </p>
           <div className="buttons">
             <a href="#projects" className="btn btn-primary">
@@ -119,7 +118,6 @@ function App() {
                 <span>CSS</span>
                 <span>JavaScript</span>
                 <span>React</span>
-                <span>Responsive Design</span>
               </div>
             </div>
             <div className="skill-box">
@@ -153,6 +151,7 @@ function App() {
                 <span>Git & GitHub</span>
                 <span>VS Code</span>
                 <span>Canva</span>
+                <span>Figma</span>
               </div>
             </div>
           </div>
@@ -214,7 +213,7 @@ function App() {
               A web-based application built with custom PHP MVC architecture (no framework)
               as part of my Information Systems Engineering coursework. The system uses
               MySQL for data management and follows separation of concerns across Model,
-              View, and Controller layers — including CRUD operations and basic authentication.
+              View, and Controller layers including CRUD operations and basic authentication.
             </p>
             <div className="tags">
               <span>PHP (MVC)</span>
@@ -222,6 +221,7 @@ function App() {
               <span>HTML</span>
               <span>CSS</span>
               <span>JavaScript</span>
+              <span>Hostinger</span>
             </div>
             <a
               href="https://github.com/masliza2703/online-booking-system"

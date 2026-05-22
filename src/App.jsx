@@ -1,7 +1,7 @@
 import './App.css'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from "framer-motion"
 
 function SectionHeader({ title, subtitle }) {
@@ -14,6 +14,19 @@ function SectionHeader({ title, subtitle }) {
 }
 
 function App() {
+  const [views, setViews] = useState(0)
+
+useEffect(() => {
+  AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 60,
+  })
+
+  fetch("https://api.countapi.xyz/hit/masliza-portfolio/visits")
+    .then((res) => res.json())
+    .then((data) => setViews(data.value))
+}, [])
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -278,6 +291,7 @@ function App() {
 
       <footer className="footer">
         <p>© {new Date().getFullYear()} Masliza. Built with React & Vite.</p>
+        <p> Portfolio Views: {views}</p>
       </footer>
     </>
   )

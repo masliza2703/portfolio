@@ -38,7 +38,7 @@ function App() {
       <section className="hero" data-aos="fade-up">
         <div className="hero-left">
           <span className="hero-badge">Portfolio 2026</span>
-          <h1>Hi, I'm Masliza 👋</h1>
+          <h1>Hi, I'm Masliza</h1>
           <p className="hero-role">Information Systems Engineering Student</p>
           <p className="subtitle">
             I am an Information Systems Engineering student with a focus on web development. I am seeking opportunities to apply my knowledge in a real working environment.
@@ -234,10 +234,10 @@ function App() {
             subtitle="Feel free to reach out — I'm open to opportunities and collaboration."
           />
           <div className="contact-list">
-            <a href="tel:0105653789" className="contact-item">
+            <a href="https://wa.me/60105653789?text=Hi%20Masliza,%20I%20saw%20your%20portfolio" className="contact-item" target="_blank" rel="noreferrer">
               <span>📞</span>
               <div>
-                <p className="label">Phone</p>
+                <p className="label">Whatsapp</p>
                 <p className="value">010-565 3789</p>
               </div>
             </a>

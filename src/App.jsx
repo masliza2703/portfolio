@@ -3,6 +3,7 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { useEffect, useState } from 'react'
 import { motion } from "framer-motion"
+import { Analytics } from '@vercel/analytics/react'
 
 function SectionHeader({ title, subtitle }) {
   return (
@@ -293,6 +294,7 @@ useEffect(() => {
         <p>© {new Date().getFullYear()} Masliza. Built with React & Vite.</p>
         <p> Portfolio Views: {views}</p>
       </footer>
+      <Analytics />
     </>
   )
 }

@@ -292,7 +292,7 @@ useEffect(() => {
 
       <footer className="footer">
         <p>© {new Date().getFullYear()} Masliza. Built with React & Vite.</p>
-        <p> Portfolio Views: {views}</p>
+        
       </footer>
       <Analytics />
     </>

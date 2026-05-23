@@ -2,8 +2,28 @@ import './App.css'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { useEffect, useState } from 'react'
-import { motion } from "framer-motion"
-import { Analytics } from "@vercel/analytics/react"
+import { motion } from 'framer-motion'
+import { Analytics } from '@vercel/analytics/react'
+
+const projects = [
+  {
+    title: 'Expenses Tracker',
+    badge: 'Featured Project',
+    description:
+      'A Flask-based personal finance web application with login, transaction management, category tracking, and dashboard summaries for reviewing income and expenses.',
+    highlights: ['Authentication', 'Transaction CRUD', 'Dashboard Summary'],
+    tags: ['Python', 'Flask', 'SQLite', 'HTML', 'CSS', 'Render'],
+    liveLink: 'https://expenses-tracker-ffgb.onrender.com/login',
+    githubLink: 'https://github.com/masliza2703/expenses-tracker',
+  },
+  {
+    title: 'Online Booking System',
+    description:
+      'A web-based application built with custom PHP MVC architecture as part of my Information Systems Engineering coursework. The system uses MySQL for data management and follows separation of concerns across Model, View, and Controller layers.',
+    tags: ['PHP (MVC)', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'Hostinger'],
+    githubLink: 'https://github.com/masliza2703/online-booking-system',
+  },
+]
 
 function SectionHeader({ title, subtitle }) {
   return (
@@ -14,26 +34,68 @@ function SectionHeader({ title, subtitle }) {
   )
 }
 
+function ProjectCard({ project, featured = false }) {
+  return (
+    <article className={`card project-card ${featured ? 'project-card-featured' : ''}`}>
+      <div className="project-card-top">
+        {project.badge && <span className="project-badge">{project.badge}</span>}
+        <h3>{project.title}</h3>
+      </div>
+      <p>{project.description}</p>
+      {project.highlights && (
+        <div className="project-highlights">
+          {project.highlights.map((highlight) => (
+            <span key={highlight}>{highlight}</span>
+          ))}
+        </div>
+      )}
+      <div className="tags">
+        {project.tags.map((tag) => (
+          <span key={tag}>{tag}</span>
+        ))}
+      </div>
+      {(project.liveLink || project.githubLink) && (
+        <div className="project-actions">
+          {project.liveLink && (
+            <a
+              href={project.liveLink}
+              target="_blank"
+              rel="noreferrer"
+              className="card-link"
+            >
+              Live Demo -&gt;
+            </a>
+          )}
+          {project.githubLink && (
+            <a
+              href={project.githubLink}
+              target="_blank"
+              rel="noreferrer"
+              className="card-link"
+            >
+              GitHub -&gt;
+            </a>
+          )}
+        </div>
+      )}
+    </article>
+  )
+}
+
 function App() {
   const [views, setViews] = useState(0)
 
-useEffect(() => {
-  AOS.init({
-    duration: 1000,
-    once: true,
-    offset: 60,
-  })
-
-  fetch("https://api.countapi.xyz/hit/masliza-portfolio/visits?cache=" + Date.now())
-    .then((res) => res.json())
-    .then((data) => setViews(data.value))
-}, [])
   useEffect(() => {
     AOS.init({
       duration: 1000,
       once: true,
       offset: 60,
     })
+
+    fetch(`https://api.countapi.xyz/hit/masliza-portfolio/visits?cache=${Date.now()}`)
+      .then((res) => res.json())
+      .then((data) => setViews(data.value))
+      .catch(() => setViews(0))
   }, [])
 
   return (
@@ -86,9 +148,9 @@ useEffect(() => {
               structured systems that solve real problems.
             </p>
             <p>
-              I have hands-on experience developing a web application using PHP with MVC
-              architecture and MySQL, focusing on clean system structure, CRUD operations,
-              and basic authentication.
+              I have hands-on experience developing web applications using PHP with MVC
+              architecture, Python Flask, and database-driven workflows, focusing on clean
+              system structure, CRUD operations, and basic authentication.
             </p>
             <p>
               I am also familiar with software development documentation such as SRS
@@ -100,11 +162,11 @@ useEffect(() => {
               React and improving my UI/UX design understanding.
             </p>
             <ul className="about-list">
-              <li>📌 Information Systems Engineering student</li>
-              <li>💻 PHP MVC + MySQL web development</li>
-              <li>📄 SRS & SDD documentation experience</li>
-              <li>🧪 Manual testing & test case design</li>
-              <li>⚛️ Learning React & modern frontend</li>
+              <li>Information Systems Engineering student</li>
+              <li>PHP MVC, Python Flask, and database-driven web development</li>
+              <li>SRS & SDD documentation experience</li>
+              <li>Manual testing & test case design</li>
+              <li>Learning React & modern frontend</li>
             </ul>
           </div>
         </div>
@@ -116,50 +178,14 @@ useEffect(() => {
             title="Skills"
             subtitle="Technologies and practices I work with across the development lifecycle."
           />
-          <div className="skills-container">
-            <div className="skill-box">
-              <h3>Frontend Development</h3>
-              <div className="tags">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
-                <span>React</span>
-              </div>
-            </div>
-            <div className="skill-box">
-              <h3>Backend Development</h3>
-              <div className="tags">
-                <span>PHP (MVC Structure)</span>
-                <span>MySQL</span>
-                <span>CRUD Operations</span>
-              </div>
-            </div>
-            <div className="skill-box">
-              <h3>Software Engineering</h3>
-              <div className="tags">
-                <span>System Analysis</span>
-                <span>SRS Documentation</span>
-                <span>SDD Documentation</span>
-                <span>UML / Flow Design</span>
-              </div>
-            </div>
-            <div className="skill-box">
-              <h3>Testing & QA</h3>
-              <div className="tags">
-                <span>Manual Testing</span>
-                <span>Test Case Design</span>
-                <span>Bug Reporting</span>
-              </div>
-            </div>
-            <div className="skill-box">
-              <h3>Tools & Workflow</h3>
-              <div className="tags">
-                <span>Git & GitHub</span>
-                <span>VS Code</span>
-                <span>Canva</span>
-                <span>Figma</span>
-              </div>
-            </div>
+          <div className="skills-panel">
+            <p><strong>Programming Languages:</strong> PHP, Python, Java, C++</p>
+            <p><strong>Framework / Architecture:</strong> MVC, Flask</p>
+            <p><strong>Frontend Development:</strong> HTML, CSS, JavaScript, React (Vite)</p>
+            <p><strong>Database:</strong> MySQL, MariaDB, MongoDB, SQLite</p>
+            <p><strong>Tools:</strong> Visual Studio Code, NetBeans, Arduino IDE, RapidMiner, GitHub, Render, Hostinger, Vercel</p>
+            <p><strong>Productivity &amp; Design Tools:</strong> Microsoft Excel, Word, PowerPoint, Figma, Draw.io, StarUML</p>
+            <p><strong>Testing &amp; Documentation:</strong> Test Case Design, Manual Testing, UAT, SRS, SDD, STD</p>
           </div>
         </div>
       </section>
@@ -173,7 +199,7 @@ useEffect(() => {
           <div className="card">
             <h3>IT Intern</h3>
             <p className="meta">
-              Maryam Khadijah Group Sdn. Bhd, Penang | Sept 2025 – Feb 2026
+              Maryam Khadijah Group Sdn. Bhd, Penang | Sept 2025 - Feb 2026
             </p>
             <ul className="exp-list">
               <li>
@@ -213,30 +239,10 @@ useEffect(() => {
             title="Projects"
             subtitle="Selected work that reflects my learning and technical growth."
           />
-          <div className="card">
-            <h3>Online Booking System</h3>
-            <p>
-              A web-based application built with custom PHP MVC architecture (no framework)
-              as part of my Information Systems Engineering coursework. The system uses
-              MySQL for data management and follows separation of concerns across Model,
-              View, and Controller layers including CRUD operations and basic authentication.
-            </p>
-            <div className="tags">
-              <span>PHP (MVC)</span>
-              <span>MySQL</span>
-              <span>HTML</span>
-              <span>CSS</span>
-              <span>JavaScript</span>
-              <span>Hostinger</span>
-            </div>
-            <a
-              href="https://github.com/masliza2703/online-booking-system"
-              target="_blank"
-              rel="noreferrer"
-              className="card-link"
-            >
-              View on GitHub →
-            </a>
+          <div className="projects-grid">
+            {projects.map((project, index) => (
+              <ProjectCard key={project.title} project={project} featured={index === 0} />
+            ))}
           </div>
         </div>
       </section>
@@ -245,18 +251,18 @@ useEffect(() => {
         <div className="section-inner">
           <SectionHeader
             title="Let's Connect"
-            subtitle="Feel free to reach out — I'm open to opportunities and collaboration."
+            subtitle="Feel free to reach out - I'm open to opportunities and collaboration."
           />
           <div className="contact-list">
             <a href="https://wa.me/60105653789?text=Hi%20Masliza,%20I%20saw%20your%20portfolio" className="contact-item" target="_blank" rel="noreferrer">
-              <span>📞</span>
+              <span>WA</span>
               <div>
                 <p className="label">Whatsapp</p>
                 <p className="value">010-565 3789</p>
               </div>
             </a>
             <a href="mailto:maslizaaaa@gmail.com" className="contact-item">
-              <span>📧</span>
+              <span>@</span>
               <div>
                 <p className="label">Email</p>
                 <p className="value">maslizaaaa@gmail.com</p>
@@ -268,7 +274,7 @@ useEffect(() => {
               rel="noreferrer"
               className="contact-item"
             >
-              <span>💻</span>
+              <span>GH</span>
               <div>
                 <p className="label">GitHub</p>
                 <p className="value">github.com/masliza2703</p>
@@ -280,7 +286,7 @@ useEffect(() => {
               rel="noreferrer"
               className="contact-item"
             >
-              <span>💼</span>
+              <span>IN</span>
               <div>
                 <p className="label">LinkedIn</p>
                 <p className="value">Masliza Ghazali</p>
@@ -291,8 +297,8 @@ useEffect(() => {
       </section>
 
       <footer className="footer">
-        <p>© {new Date().getFullYear()} Masliza. Built with React & Vite.</p>
-        
+        <p>(c) {new Date().getFullYear()} Masliza. Built with React & Vite.</p>
+        {views > 0 && <p className="footer-views">{views} portfolio visits</p>}
       </footer>
       <Analytics />
     </>

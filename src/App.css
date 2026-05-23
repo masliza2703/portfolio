@@ -16,6 +16,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 76px;
 }
 
 body {
@@ -78,6 +79,7 @@ body {
 /* ── Layout ── */
 .section {
   padding: var(--section-pad) 24px;
+  scroll-margin-top: 76px;
 }
 
 .section-inner {
@@ -330,6 +332,33 @@ body {
   gap: 20px;
 }
 
+.skills-panel {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 28px 32px;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+}
+
+.skills-panel p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.skills-panel p + p {
+  margin-top: 6px;
+}
+
+.skills-panel strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
 .skill-box {
   padding: 24px;
   background: var(--surface);
@@ -370,6 +399,13 @@ body {
 }
 
 /* ── Projects ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
 .card {
   max-width: 720px;
   margin: 0 auto;
@@ -418,6 +454,85 @@ body {
 
 .card-link:hover {
   gap: 10px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  max-width: none;
+  min-height: 100%;
+  margin: 0;
+}
+
+.project-card-featured {
+  background:
+    linear-gradient(135deg, rgba(124, 108, 255, 0.12), rgba(255, 255, 255, 0.035)),
+    var(--surface);
+  border-color: rgba(124, 108, 255, 0.28);
+}
+
+.project-card-top {
+  margin-bottom: 12px;
+}
+
+.project-card-top h3 {
+  margin-bottom: 0;
+}
+
+.project-badge {
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 5px 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  background: rgba(124, 108, 255, 0.14);
+  border: 1px solid rgba(124, 108, 255, 0.28);
+  border-radius: 999px;
+}
+
+.project-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 4px 0 18px;
+}
+
+.project-highlights span {
+  min-height: 58px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.project-card .tags {
+  margin-top: auto;
+}
+
+.project-card .card-link {
+  margin-top: 20px;
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.project-actions .card-link {
+  margin-top: 0;
 }
 
 /* ── Experience ── */
@@ -482,8 +597,19 @@ body {
 }
 
 .contact-item span:first-child {
-  font-size: 1.35rem;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 40px;
+  font-size: 0.78rem;
+  font-weight: 700;
   line-height: 1;
+  color: var(--accent-light);
+  background: rgba(124, 108, 255, 0.12);
+  border: 1px solid rgba(124, 108, 255, 0.22);
+  border-radius: 10px;
 }
 
 .contact-item .label {
@@ -514,6 +640,11 @@ body {
 
 .footer p {
   margin: 0;
+}
+
+.footer-views {
+  margin-top: 6px;
+  font-size: 0.78rem;
 }
 
 /* ── Responsive ── */
@@ -549,6 +680,10 @@ body {
   .about-content h3 {
     text-align: center;
   }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
@@ -556,8 +691,16 @@ body {
     --section-pad: 64px;
   }
 
+  html {
+    scroll-padding-top: 124px;
+  }
+
   .navbar {
     padding: 14px 20px;
+  }
+
+  .section {
+    scroll-margin-top: 124px;
   }
 
   .nav-links {
@@ -583,22 +726,16 @@ body {
   .btn {
     width: 100%;
   }
-}
-/* Experience */
-.meta {
-  color: #aaa;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
 
-.exp-list {
-  margin-top: 10px;
-  padding-left: 20px;
-  color: #ddd;
-}
+  .card {
+    padding: 24px;
+  }
 
-.exp-list li {
-  margin-bottom: 10px;
-  line-height: 1.6;
-}
+  .skills-panel {
+    padding: 24px;
+  }
 
+  .project-highlights {
+    grid-template-columns: 1fr;
+  }
+}

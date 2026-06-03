@@ -16,10 +16,8 @@ const projects = [
       'User enters salary and saving ratio',
       'System calculates savings and spending limit',
       'User adds daily expenses',
-      'System updates balance and alert message',
+      'System updates balance summary',
     ],
-    alert:
-      'This month you spent 10% (RM45) less than last month.',
     tags: ['Python', 'Flask', 'SQLite', 'HTML', 'CSS', 'Render'],
     liveLink: 'https://expenses-tracker-ffgb.onrender.com/login',
     githubLink: 'https://github.com/masliza2703/expenses-tracker',

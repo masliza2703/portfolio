@@ -7,8 +7,10 @@ import { Analytics } from '@vercel/analytics/react'
 
 const projects = [
   {
+    id: 'expenses-tracker',
     title: 'Expenses Tracker',
     badge: 'Featured Project',
+    teaser: 'Track income, expenses, savings, and monthly summaries in one simple dashboard.',
     description:
       'A Flask-based personal finance web application with login, transaction management, category tracking, and dashboard summaries for reviewing income and expenses.',
     highlights: ['Authentication', 'Transaction CRUD', 'Dashboard Summary'],
@@ -23,14 +25,28 @@ const projects = [
     githubLink: 'https://github.com/masliza2703/expenses-tracker',
   },
   {
+    id: 'online-booking-system',
     title: 'Online Booking System',
+    teaser: 'Manage service bookings through a structured PHP MVC web application.',
     description:
       'A web-based application built with custom PHP MVC architecture as part of my Information Systems Engineering coursework. The system uses MySQL for data management and follows separation of concerns across Model, View, and Controller layers.',
+    highlights: ['PHP MVC Structure', 'MySQL Database', 'Booking Workflow'],
+    flow: [
+      'User views available booking service',
+      'User submits booking details',
+      'System stores booking records',
+      'Admin manages booking information',
+    ],
     tags: ['PHP (MVC)', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'Hostinger'],
     liveLink: 'https://spamakcikmuslimah.infinityfreeapp.com',
     githubLink: 'https://github.com/masliza2703/online-booking-system',
   },
 ]
+
+function getProjectIdFromHash() {
+  const hash = window.location.hash.replace('#project-', '')
+  return projects.some((project) => project.id === hash) ? hash : null
+}
 
 function SectionHeader({ title, subtitle }) {
   return (
@@ -41,43 +57,63 @@ function SectionHeader({ title, subtitle }) {
   )
 }
 
-function ProjectCard({ project, featured = false }) {
+function ProjectCard({ project, featured = false, onOpen }) {
   return (
-    <article className={`card project-card ${featured ? 'project-card-featured' : ''}`}>
+    <button
+      type="button"
+      className={`card project-card project-card-button ${featured ? 'project-card-featured' : ''}`}
+      onClick={() => onOpen(project.id)}
+      aria-label={`Read more about ${project.title}`}
+    >
       <div className="project-card-top">
         {project.badge && <span className="project-badge">{project.badge}</span>}
         <h3>{project.title}</h3>
       </div>
-      <p>{project.description}</p>
-      {project.highlights && (
-        <div className="project-highlights">
-          {project.highlights.map((highlight) => (
-            <span key={highlight}>{highlight}</span>
-          ))}
-        </div>
-      )}
-      {project.flow && (
-        <div className="project-flow" aria-label={`${project.title} user flow`}>
-          {project.flow.map((step, index) => (
-            <div className="project-flow-step" key={step}>
-              <span>{index + 1}</span>
-              <p>{step}</p>
-            </div>
-          ))}
-        </div>
-      )}
-      {project.alert && (
-        <div className="expense-alert" role="status">
-          <span className="expense-alert-icon">!</span>
-          <p>{project.alert}</p>
-        </div>
-      )}
+      <p>{project.teaser}</p>
       <div className="tags">
-        {project.tags.map((tag) => (
+        {project.tags.slice(0, 3).map((tag) => (
           <span key={tag}>{tag}</span>
         ))}
       </div>
-      {(project.liveLink || project.githubLink) && (
+      <span className="project-more">Click to know more -&gt;</span>
+    </button>
+  )
+}
+
+function ProjectDetail({ project, onBack }) {
+  return (
+    <main className="project-page">
+      <button type="button" className="back-button" onClick={onBack}>
+        &lt;- Back to Portfolio
+      </button>
+      <article className="card project-detail-card">
+        <div className="project-card-top">
+          {project.badge && <span className="project-badge">{project.badge}</span>}
+          <h1>{project.title}</h1>
+        </div>
+        <p>{project.description}</p>
+        {project.highlights && (
+          <div className="project-highlights">
+            {project.highlights.map((highlight) => (
+              <span key={highlight}>{highlight}</span>
+            ))}
+          </div>
+        )}
+        {project.flow && (
+          <div className="project-flow" aria-label={`${project.title} user flow`}>
+            {project.flow.map((step, index) => (
+              <div className="project-flow-step" key={step}>
+                <span>{index + 1}</span>
+                <p>{step}</p>
+              </div>
+            ))}
+          </div>
+        )}
+        <div className="tags">
+          {project.tags.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
         <div className="project-actions">
           {project.liveLink && (
             <a
@@ -100,13 +136,25 @@ function ProjectCard({ project, featured = false }) {
             </a>
           )}
         </div>
-      )}
-    </article>
+      </article>
+    </main>
   )
 }
 
 function App() {
   const [views, setViews] = useState(0)
+  const [selectedProjectId, setSelectedProjectId] = useState(getProjectIdFromHash)
+  const selectedProject = projects.find((project) => project.id === selectedProjectId)
+
+  const openProject = (projectId) => {
+    window.location.hash = `project-${projectId}`
+    setSelectedProjectId(projectId)
+  }
+
+  const closeProject = () => {
+    window.location.hash = 'projects'
+    setSelectedProjectId(null)
+  }
 
   useEffect(() => {
     AOS.init({
@@ -120,6 +168,24 @@ function App() {
       .then((data) => setViews(data.value))
       .catch(() => setViews(0))
   }, [])
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setSelectedProjectId(getProjectIdFromHash())
+    }
+
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
+  if (selectedProject) {
+    return (
+      <>
+        <ProjectDetail project={selectedProject} onBack={closeProject} />
+        <Analytics />
+      </>
+    )
+  }
 
   return (
     <>
@@ -264,7 +330,12 @@ function App() {
           />
           <div className="projects-grid">
             {projects.map((project, index) => (
-              <ProjectCard key={project.title} project={project} featured={index === 0} />
+              <ProjectCard
+                key={project.title}
+                project={project}
+                featured={index === 0}
+                onOpen={openProject}
+              />
             ))}
           </div>
         </div>

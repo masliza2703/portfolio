@@ -464,6 +464,47 @@ body {
   margin: 0;
 }
 
+.project-card-button {
+  width: 100%;
+  min-height: 320px;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.project-card-button p {
+  max-width: 540px;
+}
+
+.project-card-button .tags {
+  margin-top: 12px;
+}
+
+.project-more {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: auto;
+  padding: 12px 18px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), #6355e0);
+  border-radius: 10px;
+  box-shadow: 0 4px 18px var(--accent-glow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-card-button:hover .project-more,
+.project-card-button:focus-visible .project-more {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px var(--accent-glow);
+}
+
+.project-card-button:focus-visible {
+  outline: 3px solid rgba(168, 159, 255, 0.75);
+  outline-offset: 4px;
+}
+
 .project-card-featured {
   background:
     linear-gradient(135deg, rgba(124, 108, 255, 0.12), rgba(255, 255, 255, 0.035)),
@@ -606,6 +647,52 @@ body {
 
 .project-actions .card-link {
   margin-top: 0;
+}
+
+.project-page {
+  min-height: 100vh;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 10px 16px;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent-light);
+  cursor: pointer;
+  background: rgba(124, 108, 255, 0.1);
+  border: 1px solid rgba(124, 108, 255, 0.24);
+  border-radius: 10px;
+  transition: transform 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.back-button:hover,
+.back-button:focus-visible {
+  transform: translateX(-3px);
+  background: rgba(124, 108, 255, 0.16);
+  border-color: rgba(124, 108, 255, 0.42);
+}
+
+.project-detail-card {
+  max-width: 860px;
+}
+
+.project-detail-card h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.project-detail-card > p {
+  margin-top: 22px;
+  font-size: 1.05rem;
 }
 
 /* ── Experience ── */

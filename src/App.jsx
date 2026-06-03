@@ -12,6 +12,14 @@ const projects = [
     description:
       'A Flask-based personal finance web application with login, transaction management, category tracking, and dashboard summaries for reviewing income and expenses.',
     highlights: ['Authentication', 'Transaction CRUD', 'Dashboard Summary'],
+    flow: [
+      'User enters salary and saving ratio',
+      'System calculates savings and spending limit',
+      'User adds daily expenses',
+      'System updates balance and alert message',
+    ],
+    alert:
+      'This month you spent 10% (RM45) less than last month.',
     tags: ['Python', 'Flask', 'SQLite', 'HTML', 'CSS', 'Render'],
     liveLink: 'https://expenses-tracker-ffgb.onrender.com/login',
     githubLink: 'https://github.com/masliza2703/expenses-tracker',
@@ -21,6 +29,7 @@ const projects = [
     description:
       'A web-based application built with custom PHP MVC architecture as part of my Information Systems Engineering coursework. The system uses MySQL for data management and follows separation of concerns across Model, View, and Controller layers.',
     tags: ['PHP (MVC)', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'Hostinger'],
+    liveLink: 'https://spamakcikmuslimah.infinityfreeapp.com',
     githubLink: 'https://github.com/masliza2703/online-booking-system',
   },
 ]
@@ -47,6 +56,22 @@ function ProjectCard({ project, featured = false }) {
           {project.highlights.map((highlight) => (
             <span key={highlight}>{highlight}</span>
           ))}
+        </div>
+      )}
+      {project.flow && (
+        <div className="project-flow" aria-label={`${project.title} user flow`}>
+          {project.flow.map((step, index) => (
+            <div className="project-flow-step" key={step}>
+              <span>{index + 1}</span>
+              <p>{step}</p>
+            </div>
+          ))}
+        </div>
+      )}
+      {project.alert && (
+        <div className="expense-alert" role="status">
+          <span className="expense-alert-icon">!</span>
+          <p>{project.alert}</p>
         </div>
       )}
       <div className="tags">

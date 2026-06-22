@@ -595,6 +595,58 @@ body {
   color: var(--text);
 }
 
+.project-login-info {
+  margin: 0 0 18px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.project-login-info h3 {
+  margin: 0 0 14px;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.project-login-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.project-login-card {
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.project-login-role {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+}
+
+.project-login-card p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.project-login-card p + p {
+  margin-top: 6px;
+}
+
+.project-login-note {
+  margin: 12px 0 0;
+  font-size: 0.9rem;
+  color: var(--accent-light);
+}
+
 .expense-alert {
   display: flex;
   align-items: flex-start;

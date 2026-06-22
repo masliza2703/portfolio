@@ -37,6 +37,20 @@ const projects = [
       'System stores booking records',
       'Admin manages booking information',
     ],
+    loginInfo: [
+      {
+        role: 'Admin',
+        email: 'liza@admin.mums.com',
+        password: 'Liza123!!',
+      },
+      {
+        role: 'Therapist',
+        email: 'liza@therapist.mums.com',
+        password: 'Liza123!!',
+      },
+    ],
+    loginNote:
+      'Therapist accounts can log in after the admin has accepted their registration.',
     tags: ['PHP (MVC)', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'Hostinger'],
     liveLink: 'https://spamakcikmuslimah.infinityfreeapp.com',
     githubLink: 'https://github.com/masliza2703/online-booking-system',
@@ -107,6 +121,25 @@ function ProjectDetail({ project, onBack }) {
                 <p>{step}</p>
               </div>
             ))}
+          </div>
+        )}
+        {project.loginInfo && (
+          <div className="project-login-info">
+            <h3>Login Information</h3>
+            <div className="project-login-grid">
+              {project.loginInfo.map((login) => (
+                <div className="project-login-card" key={login.role}>
+                  <p className="project-login-role">{login.role}</p>
+                  <p>
+                    <strong>Email:</strong> {login.email}
+                  </p>
+                  <p>
+                    <strong>Password:</strong> {login.password}
+                  </p>
+                </div>
+              ))}
+            </div>
+            {project.loginNote && <p className="project-login-note">{project.loginNote}</p>}
           </div>
         )}
         <div className="tags">
